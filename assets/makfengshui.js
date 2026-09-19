@@ -1,4 +1,4 @@
-/* ── makfengshui.js — 年份切換 + 生肖運程卡片渲染 ── */
+/* ── makfengshui.js — 年份切換 + 犯太歲 + 九宮飛星 + 生肖運程卡片渲染 ── */
 
 var ZODIACS = [
   {cn:'鼠',en:'Rat',   icon:'🐭'}, {cn:'牛',en:'Ox',    icon:'🐮'},
@@ -18,7 +18,81 @@ var SECTIONS = [
   {key:'開運攻略', icon:'🧧'}
 ];
 
-/* ── 主渲染：年份切換 → 重建全部卡片 ── */
+/* 九宮方位順序（洛書） */
+var FLY_DIRS = ['東南','南','西南','東','中宮','西','東北','北','西北'];
+
+var STAR_NATURE_ICON = {'吉':'🟢','凶':'🔴','平':'🟡'};
+
+/* ── 犯太歲速查 ── */
+function renderTaiSui(year) {
+  var body = document.getElementById('tai-sui-body');
+  if (!body) return;
+  var extra = (window.SITE_EXTRA || {}).tai_sui || {};
+  var ts = extra[String(year)];
+  if (!ts) { body.innerHTML = '<p class="dim">暫無資料</p>'; return; }
+
+  var h = [];
+  h.push('<div class="tai-summary">👑 值年太歲：<b>' + ts.tai_sui + '</b>（' + ts.year_label + '） — ' + ts.summary + '</div>');
+
+  // 犯太歲生肖卡片
+  h.push('<div class="tai-grid">');
+  (ts.offenders || []).forEach(function(o) {
+    var icon = '🐾';
+    ZODIACS.forEach(function(z) { if (z.cn === o.zodiac) icon = z.icon; });
+    h.push('<div class="tai-card">' +
+      '<div class="tai-head"><span class="tai-icon">' + icon + '</span>' +
+      '<span class="tai-z">' + o.zodiac + '</span>' +
+      '<span class="tai-type">' + o.type + '</span></div>' +
+      '<p class="tai-desc">' + o.desc + '</p>' +
+      '<div class="tai-remedy">🧧 ' + o.remedy + '</div>' +
+      '</div>');
+  });
+  h.push('</div>');
+
+  // 通用化解三法
+  h.push('<div class="tai-methods">');
+  h.push('<div class="tai-methods-title">化解方法（麥氏錦囊）</div>');
+  (ts.methods || []).forEach(function(m) {
+    h.push('<div class="tai-method">• ' + m + '</div>');
+  });
+  h.push('</div>');
+
+  body.innerHTML = h.join('');
+}
+
+/* ── 九宮飛星布局 ── */
+function renderFly(year) {
+  var grid = document.getElementById('fly-grid');
+  var label = document.getElementById('fly-label');
+  if (!grid) return;
+  var extra = (window.SITE_EXTRA || {}).fly_stars || {};
+  var info = (window.SITE_EXTRA || {}).star_info || {};
+  var fd = extra[String(year)];
+  if (!fd) { grid.innerHTML = '<p class="dim">暫無資料</p>'; return; }
+
+  if (label) {
+    label.textContent = fd.label + ' · ' + fd.center + '入中宮 · 適用期：' + fd.apply;
+  }
+
+  var h = [];
+  FLY_DIRS.forEach(function(dir) {
+    var cell = (fd.grid || {})[dir];
+    if (!cell) return;
+    var si = info[cell.star] || {name: cell.star, alias: '', el: '', nature: '', scope: ''};
+    var nat = si.nature === '吉' ? 'good' : (si.nature === '凶' ? 'bad' : 'mid');
+    h.push('<div class="fly-cell ' + nat + '">' +
+      '<div class="fly-dir">' + dir + '</div>' +
+      '<div class="fly-star">' + cell.star + '</div>' +
+      '<div class="fly-name">' + si.name + (si.alias ? '<br><small>' + si.alias + '</small>' : '') + '</div>' +
+      '<div class="fly-scope">' + (si.scope || '') + '</div>' +
+      '<div class="fly-item">🧧 化解／催旺：' + cell.item + '</div>' +
+      '<div class="fly-note">' + (cell.note || '') + '</div>' +
+      '</div>');
+  });
+  grid.innerHTML = h.join('');
+}
+
+/* ── 生肖運程卡片（預設收折） ── */
 function renderCards(year) {
   var grid = document.getElementById('zodiac-grid');
   if (!grid) return;
@@ -28,16 +102,20 @@ function renderCards(year) {
 
   ZODIACS.forEach(function(z) {
     var card = document.createElement('div');
-    card.className = 'zodiac-card';
+    card.className = 'zodiac-card collapsed';
     card.id = z.cn;
 
-    // 卡片頭部
+    // 卡片頭部（點擊展開/收折）
     var header = document.createElement('div');
     header.className = 'card-header';
     header.innerHTML =
       '<div class="z-icon">' + z.icon + '</div>' +
       '<div class="z-info"><div class="z-cn">屬' + z.cn + '</div>' +
-      '<div class="z-en">' + z.en + '</div></div>';
+      '<div class="z-en">' + z.en + '</div></div>' +
+      '<div class="card-toggle">▾</div>';
+    header.addEventListener('click', function() {
+      card.classList.toggle('collapsed');
+    });
     card.appendChild(header);
 
     // 六大運程段落
@@ -71,14 +149,14 @@ function switchYear() {
     c.classList.toggle('active', c.getAttribute('data-year') === year);
   });
 
+  renderTaiSui(year);
+  renderFly(year);
   renderCards(year);
 
   // 更新 hero 小標題
   var badge = document.querySelector('.hero-badge');
   if (badge) {
-    var info = (window.FORTUNE_DATA || {});
-    var years = info.years || [2023,2024,2025];
-    if (years.includes(+year)) badge.textContent = '麥玲玲 十二生肖運程 · ' + year + ' ' + getYearLabel(year);
+    badge.textContent = '麥玲玲 十二生肖運程 · ' + year + ' ' + getYearLabel(year);
   }
 }
 

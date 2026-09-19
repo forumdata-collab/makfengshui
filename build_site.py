@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""將 fortune_data.json 組合成自包含單頁靜態站（麥玲玲十二生肖運程，暗色金主題）。"""
+"""將 fortune_data.json + site_extra.json 組合成自包含單頁靜態站（麥玲玲十二生肖運程，暗色金主題）。
+
+包含：生肖運程（預設收折）、犯太歲速查、九宮飛星布局（麥氏化解）。
+"""
 import json
 import pathlib
 
@@ -11,17 +14,19 @@ OUT = ROOT / "index.html"
 # ── 數據來源：content/ 內置（可複製構建）；外部目錄只在本地存在時優先 ──
 EXTERNAL_DATA = pathlib.Path("/home/ubuntu/makfengshui-data/fortune_data.json")
 LOCAL_DATA = CONTENT / "fortune_data.json"
+EXTERNAL_EXTRA = pathlib.Path("/home/ubuntu/makfengshui-data/site_extra.json")
+LOCAL_EXTRA = CONTENT / "site_extra.json"
 
 YEARS = [2023, 2024, 2025]
 YEAR_CN = {2023: "癸卯·兔年", 2024: "甲辰·龍年", 2025: "乙巳·蛇年"}
-ZODIAC_ORDER = ["鼠","牛","虎","兔","龍","蛇","馬","羊","猴","雞","狗","豬"]
+ZODIAC_ORDER = ["鼠", "牛", "虎", "兔", "龍", "蛇", "馬", "羊", "猴", "雞", "狗", "豬"]
 ZODIAC_EN = {
-    "鼠":"Rat","牛":"Ox","虎":"Tiger","兔":"Rabbit","龍":"Dragon","蛇":"Snake",
-    "馬":"Horse","羊":"Goat","猴":"Monkey","雞":"Rooster","狗":"Dog","豬":"Pig",
+    "鼠": "Rat", "牛": "Ox", "虎": "Tiger", "兔": "Rabbit", "龍": "Dragon", "蛇": "Snake",
+    "馬": "Horse", "羊": "Goat", "猴": "Monkey", "雞": "Rooster", "狗": "Dog", "豬": "Pig",
 }
 ZODIAC_ICON = {
-    "鼠":"🐭","牛":"🐮","虎":"🐯","兔":"🐰","龍":"🐲","蛇":"🐍",
-    "馬":"🐴","羊":"🐑","猴":"🐵","雞":"🐔","狗":"🐶","豬":"🐷",
+    "鼠": "🐭", "牛": "🐮", "虎": "🐯", "兔": "🐰", "龍": "🐲", "蛇": "🐍",
+    "馬": "🐴", "羊": "🐑", "猴": "🐵", "雞": "🐔", "狗": "🐶", "豬": "🐷",
 }
 
 
@@ -50,37 +55,29 @@ def year_cards_html(selected=2025):
 
 def quick_index():
     lines = ['<div class="quick-index">', '<span class="qi-label">快速索引</span>']
+    lines.append('<a href="#tai-sui">⚡ 犯太歲速查</a>')
+    lines.append('<a href="#fly-stars">✦ 九宮飛星</a>')
+    lines.append('<span class="qi-label" style="margin-left:6px">生肖</span>')
     for z in ZODIAC_ORDER:
         lines.append(f'<a href="#{z}">{z}</a>')
     lines.append('</div>')
     return "\n".join(lines)
 
 
-def load_fortune_data():
-    """依優先順序載入運程數據，回傳 dict。"""
-    for p in (EXTERNAL_DATA, LOCAL_DATA):
+def load_json(external, local, name):
+    """依優先順序載入 JSON，回傳 dict。"""
+    for p in (external, local):
         if p.exists():
-            raw = json.loads(p.read_text(encoding="utf-8"))
             print(f"  數據來源：{p}")
-            return normalise(raw)
-    raise FileNotFoundError(
-        f"找不到 fortune_data.json — 請在以下任一位置提供：\n  {EXTERNAL_DATA}\n  {LOCAL_DATA}"
-    )
-
-
-def normalise(raw):
-    """容錯正規化：支持 {'years':[...],'fortune':{y:{z:{sec:txt}}}} 或直接 {y:{...}}"""
-    # 舊格式：dict top-level by year
-    if "fortune" not in raw and all(str(k).isdigit() for k in raw.keys()):
-        return {"years": sorted(int(k) for k in raw.keys()), "fortune": {str(k): v for k, v in raw.items()}}
-    # 正常格式
-    return raw
+            return json.loads(p.read_text(encoding="utf-8"))
+    raise FileNotFoundError(f"找不到 {name} — 請在以下任一位置提供：\n  {external}\n  {local}")
 
 
 def build():
     css = (ASSETS / "makfengshui.css").read_text(encoding="utf-8")
     js = (ASSETS / "makfengshui.js").read_text(encoding="utf-8")
-    fortune_data = load_fortune_data()
+    fortune_data = load_json(EXTERNAL_DATA, LOCAL_DATA, "fortune_data.json")
+    site_extra = load_json(EXTERNAL_EXTRA, LOCAL_EXTRA, "site_extra.json")
 
     # 統計
     n_years = len(fortune_data.get("years", []))
@@ -95,8 +92,8 @@ def build():
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="麥玲玲十二生肖運程速覽 — 2023-2025年整體運勢、事業、財運、感情、健康及開運攻略。">
-<title>麥玲玲 十二生肖運程</title>
+<meta name="description" content="麥玲玲十二生肖運程速覽 — 2023-2025年整體運勢、事業、財運、感情、健康、開運攻略、犯太歲速查及九宮飛星布局。">
+<title>麥玲玲 十二生肖運程 · 犯太歲 · 九宮飛星</title>
 <style>{css}</style>
 </head>
 <body>
@@ -105,7 +102,7 @@ def build():
 <div class="hero">
 <div class="hero-badge">麥玲玲 十二生肖運程 · {default_year} {YEAR_CN[default_year]}</div>
 <h1>🧧 麥玲玲 十二生肖運程速覽</h1>
-<p>綜合麥玲玲師傅生肖運程著作，整理 2023-2025 年十二生肖整體運勢、事業、財運、感情、健康及開運攻略</p>
+<p>綜合麥玲玲師傅生肖運程著作，整理 2023-2025 年十二生肖整體運勢、事業、財運、感情、健康及開運攻略；另附每年犯太歲速查及九宮飛星布局（以麥氏化解方法為依歸）</p>
 <div class="disclaimer">
 ⚠️ <b>免責聲明</b>：本頁內容整理自麥玲玲師傅的生肖運程著作（包括《麥玲玲 2025 蛇年運程》等），僅供娛樂參考，並非專業命理建議。內容可能經 AI 輔助整理，如有疑問請諮詢專業風水師或參閱原著。
 </div>
@@ -122,8 +119,23 @@ def build():
 
 {quick_index()}
 
+<!-- ⚡ 犯太歲速查 -->
+<div class="section" id="tai-sui">
+<div class="section-title"><span class="zodiac-icon">⚡</span><span>犯太歲速查</span></div>
+<p class="section-intro">每年犯太歲生肖、犯太歲類型與化解方法（沖喜／謹慎部署／佩戴合生肖飾物），以麥玲玲〈犯太歲化解錦囊〉為依歸。</p>
+<div id="tai-sui-body"></div>
+</div>
+
+<!-- ✦ 九宮飛星布局 -->
+<div class="section" id="fly-stars">
+<div class="section-title"><span class="zodiac-icon">✦</span><span>九宮飛星布局</span></div>
+<p class="section-intro">每年入中宮星及九宮飛星分佈，各方位的星曜吉凶與麥氏催旺／化解物品（見麥玲玲〈家居全方位風水陣〉）。適用期由該年立春起計。</p>
+<div class="fly-year-label" id="fly-label"></div>
+<div class="fly-grid" id="fly-grid"></div>
+</div>
+
 <div class="zodiac-grid" id="zodiac-grid">
-<!-- JS 動態渲染 12 張生肖運程卡片 -->
+<!-- JS 動態渲染 12 張生肖運程卡片（預設收折） -->
 </div>
 
 <div class="footer">
@@ -137,6 +149,7 @@ def build():
 
 <script>
 window.FORTUNE_DATA = {json.dumps(fortune_data, ensure_ascii=False)};
+window.SITE_EXTRA = {json.dumps(site_extra, ensure_ascii=False)};
 </script>
 <script>{js}</script>
 </body>
@@ -144,7 +157,7 @@ window.FORTUNE_DATA = {json.dumps(fortune_data, ensure_ascii=False)};
 
     OUT.write_text(html, encoding="utf-8")
     size_kb = OUT.stat().st_size / 1024
-    print(f"✓ index.html: {size_kb:.0f} KB ({n_years} 年份, 12 生肖)")
+    print(f"✓ index.html: {size_kb:.0f} KB ({n_years} 年份, {total} 生肖 + 犯太歲 + 飛星)")
 
 
 if __name__ == "__main__":
