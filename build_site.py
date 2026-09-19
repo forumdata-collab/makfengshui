@@ -57,6 +57,7 @@ def quick_index():
     lines = ['<div class="quick-index">', '<span class="qi-label">快速索引</span>']
     lines.append('<a href="#tai-sui">⚡ 犯太歲速查</a>')
     lines.append('<a href="#fly-stars">✦ 九宮飛星</a>')
+    lines.append('<a href="#luck">🧧 開運攻略</a>')
     lines.append('<span class="qi-label" style="margin-left:6px">生肖</span>')
     for z in ZODIAC_ORDER:
         lines.append(f'<a href="#{z}">{z}</a>')
@@ -132,6 +133,15 @@ def build():
 <p class="section-intro">每年入中宮星及九宮飛星分佈，各方位的星曜吉凶與麥氏催旺／化解物品（見麥玲玲〈家居全方位風水陣〉）。適用期由該年立春起計。</p>
 <div class="fly-year-label" id="fly-label"></div>
 <div class="fly-grid" id="fly-grid"></div>
+</div>
+
+<!-- 🧧 十二生肖開運攻略 -->
+<div class="section" id="luck">
+<div class="section-title"><span class="zodiac-icon">🧧</span><span>十二生肖開運攻略</span></div>
+<p class="section-intro">麥玲玲〈十二生肖開運攻略〉——十二生肖（包括冇犯太歲者）全年開運建議：佩戴飾物、顏色、方位及生活習慣。</p>
+<div class="luck-grid" id="luck-grid">
+<!-- JS 動態渲染 12 生肖開運卡（預設收折） -->
+</div>
 </div>
 
 <div class="zodiac-grid" id="zodiac-grid">

@@ -23,6 +23,52 @@ var FLY_DIRS = ['東南','南','西南','東','中宮','西','東北','北','西
 
 var STAR_NATURE_ICON = {'吉':'🟢','凶':'🔴','平':'🟡'};
 
+/* ── 十二生肖開運攻略（全部 12 生肖，含冇犯太歲者） ── */
+function renderLuck(year) {
+  var luck = ((window.SITE_EXTRA || {}).luck || {})[String(year)];
+  var grid = document.getElementById('luck-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  ZODIACS.forEach(function(z) {
+    var info = (luck && luck[z.cn]) || null;
+    var card = document.createElement('div');
+    card.className = 'luck-card collapsed';
+
+    var header = document.createElement('div');
+    header.className = 'luck-head';
+    header.innerHTML =
+      '<span class="luck-icon">' + z.icon + '</span>' +
+      '<span class="luck-z">屬' + z.cn + '</span>' +
+      (info
+        ? '<span class="luck-stars"><span class="ls-good">吉 ' + esc(info.auspicious) + '</span><span class="ls-bad">凶 ' + esc(info.inauspicious) + '</span></span>'
+        : '<span class="luck-na">暫無資料</span>') +
+      '<span class="card-toggle">▾</span>';
+    header.addEventListener('click', function() { card.classList.toggle('collapsed'); });
+    card.appendChild(header);
+
+    if (info) {
+      var bodyEl = document.createElement('div');
+      bodyEl.className = 'luck-body';
+      if (info.overview) {
+        bodyEl.innerHTML += '<div class="luck-overview">' + esc(info.overview) + '</div>';
+      }
+      (info.tips || []).forEach(function(t) {
+        bodyEl.innerHTML += '<div class="luck-sec"><div class="luck-sec-title">' + esc(t.title) + '</div>' +
+          '<div class="luck-sec-text">' + esc(t.text) + '</div></div>';
+      });
+      card.appendChild(bodyEl);
+    }
+    grid.appendChild(card);
+  });
+}
+
+function esc(s) {
+  var d = document.createElement('div');
+  d.textContent = (s || '');
+  return d.innerHTML;
+}
+
 /* ── 犯太歲速查 ── */
 function renderTaiSui(year) {
   var body = document.getElementById('tai-sui-body');
@@ -151,6 +197,7 @@ function switchYear() {
 
   renderTaiSui(year);
   renderFly(year);
+  renderLuck(year);
   renderCards(year);
 
   // 更新 hero 小標題

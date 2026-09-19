@@ -85,6 +85,25 @@ h1{font-size:34px;margin-bottom:10px;line-height:1.32}
 .fly-item{font-size:12px;color:var(--gold);margin-top:6px;line-height:1.6}
 .fly-note{font-size:11px;color:var(--dim);margin-top:5px;line-height:1.6}
 
+/* ── 十二生肖開運攻略 ── */
+.luck-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.luck-card{background:rgba(255,235,190,0.035);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.luck-head{display:flex;align-items:center;gap:8px;padding:12px 13px;cursor:pointer;user-select:none}
+.luck-head:hover{background:rgba(255,255,255,0.02)}
+.luck-icon{font-size:19px;flex-shrink:0}
+.luck-z{font-size:15px;font-weight:700;color:var(--text);flex-shrink:0}
+.luck-stars{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0;font-size:10.5px;line-height:1.4}
+.ls-good{color:var(--green)}
+.ls-bad{color:var(--red)}
+.luck-na{font-size:12px;color:var(--dim);flex:1}
+.luck-body{padding:0 13px 14px;border-top:1px solid var(--border)}
+.luck-overview{font-size:12.8px;color:var(--text);line-height:1.8;margin:10px 0 8px;background:rgba(255,235,190,0.04);border-radius:8px;padding:8px 11px}
+.luck-sec{margin:9px 0 0}
+.luck-sec-title{font-size:13px;font-weight:600;color:var(--gold);margin-bottom:4px}
+.luck-sec-text{font-size:12.5px;color:var(--text);line-height:1.8}
+.luck-card.collapsed .card-toggle{transform:rotate(-90deg)}
+.luck-card.collapsed .luck-body{display:none}
+
 /* ── Zodiac Grid ── */
 .zodiac-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin:24px 0}
 
@@ -130,6 +149,7 @@ h1{font-size:34px;margin-bottom:10px;line-height:1.32}
 /* ── Responsive ── */
 @media(max-width:640px){
   .zodiac-grid{grid-template-columns:1fr;gap:14px}
+  .luck-grid{grid-template-columns:1fr;gap:10px}
   h1{font-size:26px}
   .hero{padding:38px 0 20px}
   .card-header{padding:18px 18px 13px}
