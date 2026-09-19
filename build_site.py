@@ -8,7 +8,7 @@ ASSETS = ROOT / "assets"
 CONTENT = ROOT / "content"
 OUT = ROOT / "index.html"
 
-# ── 數據來源：外置目錄優先（更新時不必進 repo），fallback 至 content/ ──
+# ── 數據來源：content/ 內置（可複製構建）；外部目錄只在本地存在時優先 ──
 EXTERNAL_DATA = pathlib.Path("/home/ubuntu/makfengshui-data/fortune_data.json")
 LOCAL_DATA = CONTENT / "fortune_data.json"
 
