@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="麥玲玲十二生肖運程速覽 — 2023-2025年整體運勢、事業、財運、感情、健康及開運攻略。">
+<title>麥玲玲 十二生肖運程</title>
+<style>/* ── makfengshui.css — 深色暖金主題（麥玲玲風格） ── */
+:root{
+  --bg1:#17110d;--bg2:#271c12;--bg3:#1e1510;
+  --card:rgba(255,235,190,0.045);--card-hi:rgba(255,235,190,0.075);
+  --border:rgba(255,235,190,0.10);
+  --text:#f0e6d4;--dim:rgba(240,230,212,0.52);
+  --accent:#e0a04a;--gold:#d4a03c;--red:#d97a68;--teal:#c9a86a;
+  --green:#a8c478;--orange:#e8985a;--purple:#c9a86a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC','Microsoft JhengHei','Noto Sans TC',sans-serif;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));color:var(--text);min-height:100vh;line-height:1.7}
+.container{max-width:900px;margin:0 auto;padding:0 20px}
+
+/* ── Hero ── */
+.hero{text-align:center;padding:52px 0 28px}
+.hero-badge{display:inline-block;background:rgba(230,160,74,0.12);color:var(--accent);
+  border:1px solid rgba(230,160,74,0.32);border-radius:20px;padding:3px 16px;font-size:12px;margin-bottom:16px;letter-spacing:0.3px}
+h1{font-size:34px;margin-bottom:10px;line-height:1.32}
+.hero p{color:var(--dim);font-size:14px;margin-bottom:8px}
+.disclaimer{background:rgba(230,160,74,0.07);border:1px solid rgba(230,160,74,0.22);
+  border-radius:10px;padding:13px 16px;font-size:12.5px;color:var(--orange);
+  margin:16px auto 0;max-width:640px;line-height:1.7}
+
+/* ── Year Bar ── */
+.year-bar{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin:24px 0 8px}
+.year-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 22px;min-width:140px;text-align:center;transition:all .22s}
+.year-card.active{border-color:var(--accent);background:var(--card-hi)}
+.year-card .y{font-size:26px;font-weight:700;color:var(--teal)}
+.year-card .g{font-size:13px;color:var(--dim);margin-top:2px}
+.year-card .s{font-size:12px;color:var(--orange);margin-top:2px}
+
+/* ── Controls ── */
+.controls{display:flex;gap:12px;align-items:center;justify-content:center;margin:18px 0;flex-wrap:wrap}
+.controls label{font-size:13px;color:var(--dim)}
+.controls select{background:var(--card);border:1px solid var(--border);border-radius:8px;
+  color:var(--text);padding:7px 12px;font-size:14px;cursor:pointer}
+.controls select:focus{outline:1px solid var(--accent)}
+
+/* ── Quick Index ── */
+.quick-index{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center;
+  margin:18px 0 4px;padding:12px 14px;background:rgba(255,255,255,0.035);
+  border:1px solid var(--border);border-radius:12px}
+.quick-index .qi-label{font-size:12px;color:var(--accent);font-weight:600;margin-right:4px}
+.quick-index a{font-size:12.5px;color:var(--dim);text-decoration:none;padding:4px 11px;
+  border-radius:8px;border:1px solid var(--border);transition:all .2s}
+.quick-index a:hover{color:var(--text);border-color:rgba(255,255,255,0.25);background:rgba(255,255,255,0.06)}
+
+/* ── Zodiac Grid ── */
+.zodiac-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin:24px 0}
+
+/* ── Zodiac Card ── */
+.zodiac-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .22s}
+.zodiac-card:hover{border-color:rgba(230,160,74,0.3)}
+.card-header{display:flex;align-items:center;gap:14px;padding:22px 22px 16px;border-bottom:1px solid var(--border)}
+.card-header .z-icon{width:50px;height:50px;border-radius:50%;
+  background:rgba(230,160,74,0.13);border:1px solid rgba(230,160,74,0.35);
+  display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.card-header .z-info{flex:1}
+.card-header .z-cn{font-size:18px;font-weight:700;color:var(--text)}
+.card-header .z-en{font-size:12.5px;color:var(--dim);margin-top:1px}
+.card-body{padding:0 22px 18px}
+
+/* ── Fortune Section ── */
+.fortune-sec{margin:14px 0 0}
+.fortune-sec:first-child{margin-top:16px}
+.fortune-sec .fs-label{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.fortune-sec .fs-label .fs-icon{width:28px;height:28px;border-radius:7px;
+  background:rgba(230,160,74,0.10);border:1px solid rgba(230,160,74,0.25);
+  display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.fortune-sec .fs-label .fs-title{font-size:14px;font-weight:600;color:var(--accent)}
+.fortune-sec .fs-text{font-size:13.8px;color:var(--text);line-height:1.8;margin-left:36px}
+
+/* ── Open luck highlight ── */
+.fortune-sec.open-luck .fs-label .fs-icon{background:rgba(217,122,104,0.15);border-color:rgba(217,122,104,0.35)}
+
+/* ── Footer ── */
+.footer{text-align:center;padding:32px 20px 48px;color:var(--dim);font-size:12.5px;border-top:1px solid var(--border);margin-top:28px}
+
+/* ── Back to Top ── */
+#toTop{position:fixed;right:22px;bottom:26px;width:46px;height:46px;border-radius:50%;
+  background:rgba(230,160,74,0.92);color:#fff;border:none;font-size:20px;cursor:pointer;
+  box-shadow:0 4px 14px rgba(0,0,0,0.35);opacity:0;visibility:hidden;transform:translateY(10px);transition:all .25s;z-index:99}
+#toTop.show{opacity:1;visibility:visible;transform:translateY(0)}
+#toTop:hover{background:var(--accent);transform:translateY(-2px)}
+
+/* ── Responsive ── */
+@media(max-width:640px){
+  .zodiac-grid{grid-template-columns:1fr;gap:14px}
+  h1{font-size:26px}
+  .hero{padding:38px 0 20px}
+  .card-header{padding:18px 18px 13px}
+  .card-body{padding:0 18px 16px}
+  .year-bar{gap:8px}
+  .year-card{min-width:100px;padding:11px 16px}
+  .year-card .y{font-size:22px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="hero">
+<div class="hero-badge">麥玲玲 十二生肖運程 · 2025 乙巳·蛇年</div>
+<h1>🧧 麥玲玲 十二生肖運程速覽</h1>
+<p>綜合麥玲玲師傅生肖運程著作，整理 2023-2025 年十二生肖整體運勢、事業、財運、感情、健康及開運攻略</p>
+<div class="disclaimer">
+⚠️ <b>免責聲明</b>：本頁內容整理自麥玲玲師傅的生肖運程著作（包括《麥玲玲 2025 蛇年運程》等），僅供娛樂參考，並非專業命理建議。內容可能經 AI 輔助整理，如有疑問請諮詢專業風水師或參閱原著。
+</div>
+</div>
+
+<div class="year-bar">
+<div class="year-card" data-year="2023"><div class="y">癸卯</div><div class="g">2023 兔年</div><div class="s">天干地支</div></div>
+<div class="year-card" data-year="2024"><div class="y">甲辰</div><div class="g">2024 龍年</div><div class="s">天干地支</div></div>
+<div class="year-card active" data-year="2025"><div class="y">乙巳</div><div class="g">2025 蛇年</div><div class="s">天干地支</div></div>
+</div>
+
+<div class="controls">
+<label>選擇年份：</label>
+<select id="year-select" onchange="switchYear()">
+<option value="2023">2023 癸卯·兔年</option>
+<option value="2024">2024 甲辰·龍年</option>
+<option value="2025" selected>2025 乙巳·蛇年</option>
+</select>
+</div>
+
+<div class="quick-index">
+<span class="qi-label">快速索引</span>
+<a href="#鼠">鼠</a>
+<a href="#牛">牛</a>
+<a href="#虎">虎</a>
+<a href="#兔">兔</a>
+<a href="#龍">龍</a>
+<a href="#蛇">蛇</a>
+<a href="#馬">馬</a>
+<a href="#羊">羊</a>
+<a href="#猴">猴</a>
+<a href="#雞">雞</a>
+<a href="#狗">狗</a>
+<a href="#豬">豬</a>
+</div>
+
+<div class="zodiac-grid" id="zodiac-grid">
+<!-- JS 動態渲染 12 張生肖運程卡片 -->
+</div>
+
+<div class="footer">
+<p>內容整理自麥玲玲師傅生肖運程著作（2023-2025）· 僅供娛樂參考，不代表專業命理建議</p>
+<p>如需準確運程，請參閱麥玲玲原著或諮詢專業風水師</p>
+<p>© 2024-2025 麥玲玲運程速覽 · 非官方產品，與麥玲玲師傅無關</p>
+</div>
+
+<button id="toTop" aria-label="返回頂部">↑</button>
+</div>
+
+<script>
+window.FORTUNE_DATA = {"years": [2023, 2024, 2025], "fortune": {"2023": {"鼠": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "牛": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "虎": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "兔": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "龍": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "蛇": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "馬": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "羊": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "猴": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "雞": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "狗": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "豬": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}}, "2024": {"鼠": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "牛": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "虎": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "兔": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "龍": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "蛇": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "馬": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "羊": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "猴": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "雞": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "狗": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "豬": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}}, "2025": {"鼠": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "牛": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "虎": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "兔": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "龍": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "蛇": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "馬": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "羊": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "猴": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "雞": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "狗": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}, "豬": {"整體運勢": "載入中...", "事業運": "載入中...", "財運": "載入中...", "感情運": "載入中...", "健康運": "載入中...", "開運攻略": "載入中..."}}}};
+</script>
+<script>/* ── makfengshui.js — 年份切換 + 生肖運程卡片渲染 ── */
+
+var ZODIACS = [
+  {cn:'鼠',en:'Rat',   icon:'🐭'}, {cn:'牛',en:'Ox',    icon:'🐮'},
+  {cn:'虎',en:'Tiger', icon:'🐯'}, {cn:'兔',en:'Rabbit', icon:'🐰'},
+  {cn:'龍',en:'Dragon',icon:'🐲'}, {cn:'蛇',en:'Snake',  icon:'🐍'},
+  {cn:'馬',en:'Horse', icon:'🐴'}, {cn:'羊',en:'Goat',   icon:'🐑'},
+  {cn:'猴',en:'Monkey',icon:'🐵'}, {cn:'雞',en:'Rooster',icon:'🐔'},
+  {cn:'狗',en:'Dog',   icon:'🐶'}, {cn:'豬',en:'Pig',    icon:'🐷'}
+];
+
+var SECTIONS = [
+  {key:'整體運勢', icon:'☯️'},
+  {key:'事業運',   icon:'💼'},
+  {key:'財運',     icon:'💰'},
+  {key:'感情運',   icon:'❤️'},
+  {key:'健康運',   icon:'💪'},
+  {key:'開運攻略', icon:'🧧'}
+];
+
+/* ── 主渲染：年份切換 → 重建全部卡片 ── */
+function renderCards(year) {
+  var grid = document.getElementById('zodiac-grid');
+  if (!grid) return;
+  var data = (window.FORTUNE_DATA || {}).fortune || {};
+  var yearData = data[String(year)] || {};
+  grid.innerHTML = '';
+
+  ZODIACS.forEach(function(z) {
+    var card = document.createElement('div');
+    card.className = 'zodiac-card';
+    card.id = z.cn;
+
+    // 卡片頭部
+    var header = document.createElement('div');
+    header.className = 'card-header';
+    header.innerHTML =
+      '<div class="z-icon">' + z.icon + '</div>' +
+      '<div class="z-info"><div class="z-cn">屬' + z.cn + '</div>' +
+      '<div class="z-en">' + z.en + '</div></div>';
+    card.appendChild(header);
+
+    // 六大運程段落
+    var body = document.createElement('div');
+    body.className = 'card-body';
+
+    SECTIONS.forEach(function(sec) {
+      var secDiv = document.createElement('div');
+      secDiv.className = 'fortune-sec' + (sec.key === '開運攻略' ? ' open-luck' : '');
+      var text = (yearData[z.cn] && yearData[z.cn][sec.key]) || '暫無資料';
+      secDiv.innerHTML =
+        '<div class="fs-label"><span class="fs-icon">' + sec.icon + '</span>' +
+        '<span class="fs-title">' + sec.key + '</span></div>' +
+        '<div class="fs-text">' + text + '</div>';
+      body.appendChild(secDiv);
+    });
+
+    card.appendChild(body);
+    grid.appendChild(card);
+  });
+}
+
+/* ── 年份選單切換 ── */
+function switchYear() {
+  var sel = document.getElementById('year-select');
+  if (!sel) return;
+  var year = sel.value;
+
+  // 高亮對應的 year-card
+  document.querySelectorAll('.year-card').forEach(function(c) {
+    c.classList.toggle('active', c.getAttribute('data-year') === year);
+  });
+
+  renderCards(year);
+
+  // 更新 hero 小標題
+  var badge = document.querySelector('.hero-badge');
+  if (badge) {
+    var info = (window.FORTUNE_DATA || {});
+    var years = info.years || [2023,2024,2025];
+    if (years.includes(+year)) badge.textContent = '麥玲玲 十二生肖運程 · ' + year + ' ' + getYearLabel(year);
+  }
+}
+
+function getYearLabel(y) {
+  var labels = {'2023':'癸卯兔年','2024':'甲辰龍年','2025':'乙巳蛇年'};
+  return labels[y] || '';
+}
+
+/* ── 返回頂部 ── */
+(function() {
+  var btn = document.getElementById('toTop');
+  if (!btn) return;
+  window.addEventListener('scroll', function() {
+    btn.classList.toggle('show', (window.pageYOffset || document.documentElement.scrollTop) > 400);
+  }, {passive: true});
+  btn.addEventListener('click', function() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+})();
+
+/* ── 初始渲染 ── */
+document.addEventListener('DOMContentLoaded', function() {
+  var sel = document.getElementById('year-select');
+  if (sel) switchYear();
+});
+</script>
+</body>
+</html>
