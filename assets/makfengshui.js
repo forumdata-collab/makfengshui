@@ -171,7 +171,15 @@ function renderCards(year) {
     SECTIONS.forEach(function(sec) {
       var secDiv = document.createElement('div');
       secDiv.className = 'fortune-sec' + (sec.key === '開運攻略' ? ' open-luck' : '');
-      var text = (yearData[z.cn] && yearData[z.cn][sec.key]) || '暫無資料';
+      var hasBook = yearData[z.cn] && yearData[z.cn][sec.key];
+      var text;
+      if (hasBook) {
+        text = hasBook;
+      } else if (yearData[z.cn] && yearData[z.cn]._derived) {
+        text = '2027-2030 為按麥氏規則推演，詳細運程待原著出版後補齊';
+      } else {
+        text = '暫無資料';
+      }
       secDiv.innerHTML =
         '<div class="fs-label"><span class="fs-icon">' + sec.icon + '</span>' +
         '<span class="fs-title">' + sec.key + '</span></div>' +
@@ -208,7 +216,8 @@ function switchYear() {
 }
 
 function getYearLabel(y) {
-  var labels = {'2023':'癸卯兔年','2024':'甲辰龍年','2025':'乙巳蛇年'};
+  var labels = {'2023':'癸卯兔年','2024':'甲辰龍年','2025':'乙巳蛇年','2026':'丙午馬年',
+                '2027':'丁未羊年','2028':'戊申猴年','2029':'己酉雞年','2030':'庚戌狗年'};
   return labels[y] || '';
 }
 

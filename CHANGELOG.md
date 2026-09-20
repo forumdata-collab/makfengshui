@@ -1,3 +1,9 @@
+## 2026-09-20 — Site v3: 2026-2030 年份擴展
+
+- **2026 丙午馬年 full content** (from《麥玲玲 2026 馬年運程》scanned book): 12 生肖運程 (6 sections), 12 開運攻略, 犯太歲 (馬值/鼠沖/兔破/牛害 + 飾物配對), 九宮飛星 (一白入中). Vision-extracted.
+- **2027-2030 rule-derived data** (marked 「推演」): 犯太歲 + 飾物配對 + 九宮飛星 + 太歲/歲破/三煞方位, computed from the Mak-system rules verified against 2023-2026 books (地支六沖/三刑/六害/六破/值 + 洛書順飛, 入中星逐年逆退). Fortune/luck text shows 「待原著」 until books available. Cross-checked: 2027 九紫入中 + 羊值/牛沖/狗刑/鼠害 matches the independently-OCR'd sokman-2027 data.
+- Year selector now 2023-2030 (8 years). OCR backup updated with 2026 extraction (12 zodiac + 12 luck + tai + fly).
+
 ## 2026-09-20 — Site v2.1: 十二生肖開運攻略 (all 12 zodiacs, 3 years)
 
 - **🧧 十二生肖開運攻略** section added: 麥玲玲〈十二生肖開運攻略〉for ALL 12 zodiacs (including non-犯太歲 ones) — 概述 / 吉星 / 凶星 / 開運攻略 sub-sections (佩戴飾物、顏色、方位、習慣). Covers 2023/2024/2025 (36 entries, vision-extracted from book pages 27-40).
