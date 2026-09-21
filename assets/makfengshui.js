@@ -40,6 +40,7 @@ function renderLuck(year) {
     header.innerHTML =
       '<span class="luck-icon">' + z.icon + '</span>' +
       '<span class="luck-z">屬' + z.cn + '</span>' +
+      (info && info.derived ? '<span class="derived-tag">推演</span>' : '') +
       (info
         ? '<span class="luck-stars"><span class="ls-good">吉 ' + esc(info.auspicious) + '</span><span class="ls-bad">凶 ' + esc(info.inauspicious) + '</span></span>'
         : '<span class="luck-na">暫無資料</span>') +
@@ -158,6 +159,7 @@ function renderCards(year) {
       '<div class="z-icon">' + z.icon + '</div>' +
       '<div class="z-info"><div class="z-cn">屬' + z.cn + '</div>' +
       '<div class="z-en">' + z.en + '</div></div>' +
+      (yearData[z.cn] && yearData[z.cn]._derived ? '<span class="derived-tag">推演</span>' : '') +
       '<div class="card-toggle">▾</div>';
     header.addEventListener('click', function() {
       card.classList.toggle('collapsed');

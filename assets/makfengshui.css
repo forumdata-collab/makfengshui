@@ -158,3 +158,8 @@ h1{font-size:34px;margin-bottom:10px;line-height:1.32}
   .year-card{min-width:100px;padding:11px 16px}
   .year-card .y{font-size:22px}
 }
+
+/* ── 推演標籤（2027-2030 按麥氏規則推演，原著未出版） ── */
+.derived-tag{font-size:10px;font-weight:700;letter-spacing:.5px;color:#e6a04a;
+  background:rgba(230,160,74,.12);border:1px solid rgba(230,160,74,.35);
+  border-radius:999px;padding:2px 8px;flex-shrink:0;white-space:nowrap}
