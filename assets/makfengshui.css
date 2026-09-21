@@ -159,6 +159,15 @@ h1{font-size:34px;margin-bottom:10px;line-height:1.32}
   .year-card .y{font-size:22px}
 }
 
+/* ── 推演提示（2027-2030 非原著年份） ── */
+.derived-notice{display:flex;gap:9px;align-items:flex-start;margin:14px 0 0;
+  background:rgba(230,160,74,.09);border:1px solid rgba(230,160,74,.35);
+  border-left:3px solid #e6a04a;border-radius:10px;padding:11px 13px}
+.derived-notice .dn-icon{font-size:14px;flex-shrink:0;line-height:1.55}
+.derived-notice .dn-text{font-size:12.5px;line-height:1.65;color:var(--text)}
+.derived-notice .dn-text b{color:#e6a04a}
+.derived-notice[hidden]{display:none}
+
 /* ── 推演標籤（2027-2030 按麥氏規則推演，原著未出版） ── */
 .derived-tag{font-size:10px;font-weight:700;letter-spacing:.5px;color:#e6a04a;
   background:rgba(230,160,74,.12);border:1px solid rgba(230,160,74,.35);

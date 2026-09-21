@@ -194,6 +194,26 @@ function renderCards(year) {
   });
 }
 
+/* ── 推演提示（原著未出版年份） ── */
+var DERIVED_YEARS = [2027, 2028, 2029, 2030];
+
+function renderDerivedNotice(year) {
+  var el = document.getElementById('derived-notice');
+  if (!el) return;
+  var n = Number(year);
+  var isDerived = DERIVED_YEARS.indexOf(n) >= 0;
+  if (!isDerived) {
+    // 數據驅動 fallback：該年任何條目帶 _derived / derived 旗標
+    var fd = ((window.FORTUNE_DATA || {}).fortune || {})[String(year)] || {};
+    var lk = ((window.SITE_EXTRA || {}).luck || {})[String(year)] || {};
+    isDerived = Object.keys(fd).some(function(k) { return fd[k] && fd[k]._derived; }) ||
+                Object.keys(lk).some(function(k) { return lk[k] && lk[k].derived; });
+  }
+  var y = document.getElementById('dn-year');
+  if (y) y.textContent = year + ' ' + getYearLabel(year);
+  el.hidden = !isDerived;
+}
+
 /* ── 年份選單切換 ── */
 function switchYear() {
   var sel = document.getElementById('year-select');
@@ -209,6 +229,7 @@ function switchYear() {
   renderFly(year);
   renderLuck(year);
   renderCards(year);
+  renderDerivedNotice(year);
 
   // 更新 hero 小標題
   var badge = document.querySelector('.hero-badge');

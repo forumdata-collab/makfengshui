@@ -119,6 +119,11 @@ def build():
 </select>
 </div>
 
+<div class="derived-notice" id="derived-notice" hidden>
+<span class="dn-icon">⚠️</span>
+<span class="dn-text"><b><span id="dn-year"></span> 為推演內容</b> — 按麥玲玲師傅生肖運程體系（流年星神＋地支關係＋九宮飛星）推演，並非原著文字；詳細運程待原著出版後補齊。原著年份：2023-2026。</span>
+</div>
+
 {quick_index()}
 
 <!-- ⚡ 犯太歲速查 -->

@@ -166,6 +166,15 @@ h1{font-size:34px;margin-bottom:10px;line-height:1.32}
   .year-card .y{font-size:22px}
 }
 
+/* ── 推演提示（2027-2030 非原著年份） ── */
+.derived-notice{display:flex;gap:9px;align-items:flex-start;margin:14px 0 0;
+  background:rgba(230,160,74,.09);border:1px solid rgba(230,160,74,.35);
+  border-left:3px solid #e6a04a;border-radius:10px;padding:11px 13px}
+.derived-notice .dn-icon{font-size:14px;flex-shrink:0;line-height:1.55}
+.derived-notice .dn-text{font-size:12.5px;line-height:1.65;color:var(--text)}
+.derived-notice .dn-text b{color:#e6a04a}
+.derived-notice[hidden]{display:none}
+
 /* ── 推演標籤（2027-2030 按麥氏規則推演，原著未出版） ── */
 .derived-tag{font-size:10px;font-weight:700;letter-spacing:.5px;color:#e6a04a;
   background:rgba(230,160,74,.12);border:1px solid rgba(230,160,74,.35);
@@ -207,6 +216,11 @@ h1{font-size:34px;margin-bottom:10px;line-height:1.32}
 <option value="2029">2029 己酉·雞年</option>
 <option value="2030" selected>2030 庚戌·狗年</option>
 </select>
+</div>
+
+<div class="derived-notice" id="derived-notice" hidden>
+<span class="dn-icon">⚠️</span>
+<span class="dn-text"><b><span id="dn-year"></span> 為推演內容</b> — 按麥玲玲師傅生肖運程體系（流年星神＋地支關係＋九宮飛星）推演，並非原著文字；詳細運程待原著出版後補齊。原著年份：2023-2026。</span>
 </div>
 
 <div class="quick-index">
@@ -466,6 +480,26 @@ function renderCards(year) {
   });
 }
 
+/* ── 推演提示（原著未出版年份） ── */
+var DERIVED_YEARS = [2027, 2028, 2029, 2030];
+
+function renderDerivedNotice(year) {
+  var el = document.getElementById('derived-notice');
+  if (!el) return;
+  var n = Number(year);
+  var isDerived = DERIVED_YEARS.indexOf(n) >= 0;
+  if (!isDerived) {
+    // 數據驅動 fallback：該年任何條目帶 _derived / derived 旗標
+    var fd = ((window.FORTUNE_DATA || {}).fortune || {})[String(year)] || {};
+    var lk = ((window.SITE_EXTRA || {}).luck || {})[String(year)] || {};
+    isDerived = Object.keys(fd).some(function(k) { return fd[k] && fd[k]._derived; }) ||
+                Object.keys(lk).some(function(k) { return lk[k] && lk[k].derived; });
+  }
+  var y = document.getElementById('dn-year');
+  if (y) y.textContent = year + ' ' + getYearLabel(year);
+  el.hidden = !isDerived;
+}
+
 /* ── 年份選單切換 ── */
 function switchYear() {
   var sel = document.getElementById('year-select');
@@ -481,6 +515,7 @@ function switchYear() {
   renderFly(year);
   renderLuck(year);
   renderCards(year);
+  renderDerivedNotice(year);
 
   // 更新 hero 小標題
   var badge = document.querySelector('.hero-badge');
