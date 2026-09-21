@@ -30,13 +30,14 @@ Major update referencing the 蘇氏 website format, with 麥氏 (Mak Ling Ling) 
 - **主頁索引及返回頂部**: quick-index bar (犯太歲/飛星/12生肖 anchors) + back-to-top button.
 - build_site.py now also reads `content/site_extra.json` (犯太歲 + 飛星 data); build verified reproducible from repo content alone (external data dir only preferred when present locally).
 
-## OCR 備份 (local only, not committed — scanned-book derived text)
+## 抽取／推演記錄備份 (local only, not committed)
 
-`~/makfengshui-data/makfengshui-ocr-backup.tar.gz` — 36 per-zodiac extraction JSONs (3 years × 12) + fortune_data.json + site_extra.json + page renders.
+`~/makfengshui-data/makfengshui-ocr-backup-<日期>.tar.gz` — 全部抽取與推演記錄：原著掃描 PDF（2023/2024/2025/2026 + 2027）、各年 per-zodiac 抽取 JSON、真書 2027 核對與運程全文（`real2026/{ext,fort_text,luck_tips,rex}`）、規則庫與引擎（`derive/*.json|py`）、生成內容（`derive/gen`）、MANIFEST.txt（含各 PDF SHA256）。排除可重生嘅 PNG 渲染。
 
-- SHA256: `77d8a89d168f76ec0a2acb512689fd2a3916c964b80a93b33934f141a5d9b3a4`
-- Size: 124,506,416 bytes (91 entries)
-- Regenerate: `tar czf makfengshui-ocr-backup.tar.gz ocr/ fortune_data.json site_extra.json`
+- 最新（2026-09-21）: SHA256 `4e0f76f9aa735de6a3ec00dba09a0571f48fb0d48eabae7b4f7680618ec79d7b`，340 MB，244 檔
+- 上傳位置：GDrive `ocr-backups-mak-sok`（`python3 derive/upload_dated_backup.py`，read-back 比對 md5）
+- 打包：`python3 derive/build_backup.py`（自動產生 MANIFEST 與 SHA256）
+- 舊版（2026-09-20）: `makfengshui-ocr-backup.tar.gz` — 517 MB，含 2023-2026 page renders（PNG 可由 PDF 重生，故新版不再收錄）
 
 ## 2026-09-20 — Initial release
 

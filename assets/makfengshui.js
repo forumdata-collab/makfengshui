@@ -195,7 +195,7 @@ function renderCards(year) {
 }
 
 /* ── 推演提示（原著未出版年份） ── */
-var DERIVED_YEARS = [2027, 2028, 2029, 2030];
+var DERIVED_YEARS = [2028, 2029, 2030];
 
 function renderDerivedNotice(year) {
   var el = document.getElementById('derived-notice');
