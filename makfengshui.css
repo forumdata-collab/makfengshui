@@ -1,0 +1,174 @@
+/* ── makfengshui.css — 深色暖金主題（麥玲玲風格） ── */
+:root{
+  --bg1:#17110d;--bg2:#271c12;--bg3:#1e1510;
+  --card:rgba(255,235,190,0.045);--card-hi:rgba(255,235,190,0.075);
+  --border:rgba(255,235,190,0.10);
+  --text:#f0e6d4;--dim:rgba(240,230,212,0.52);
+  --accent:#e0a04a;--gold:#d4a03c;--red:#d97a68;--teal:#c9a86a;
+  --green:#a8c478;--orange:#e8985a;--purple:#c9a86a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang TC','Microsoft JhengHei','Noto Sans TC',sans-serif;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));color:var(--text);min-height:100vh;line-height:1.7}
+.container{max-width:900px;margin:0 auto;padding:0 20px}
+
+/* ── Hero ── */
+.hero{text-align:center;padding:52px 0 28px}
+.hero-badge{display:inline-block;background:rgba(230,160,74,0.12);color:var(--accent);
+  border:1px solid rgba(230,160,74,0.32);border-radius:20px;padding:3px 16px;font-size:12px;margin-bottom:16px;letter-spacing:0.3px}
+h1{font-size:34px;margin-bottom:10px;line-height:1.32}
+.hero p{color:var(--dim);font-size:14px;margin-bottom:8px}
+.disclaimer{background:rgba(230,160,74,0.07);border:1px solid rgba(230,160,74,0.22);
+  border-radius:10px;padding:13px 16px;font-size:12.5px;color:var(--orange);
+  margin:16px auto 0;max-width:640px;line-height:1.7}
+
+/* ── Year Bar ── */
+.year-bar{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin:24px 0 8px}
+.year-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 22px;min-width:140px;text-align:center;transition:all .22s}
+.year-card.active{border-color:var(--accent);background:var(--card-hi)}
+.year-card .y{font-size:26px;font-weight:700;color:var(--teal)}
+.year-card .g{font-size:13px;color:var(--dim);margin-top:2px}
+.year-card .s{font-size:12px;color:var(--orange);margin-top:2px}
+
+/* ── Controls ── */
+.controls{display:flex;gap:12px;align-items:center;justify-content:center;margin:18px 0;flex-wrap:wrap}
+.controls label{font-size:13px;color:var(--dim)}
+.controls select{background:var(--card);border:1px solid var(--border);border-radius:8px;
+  color:var(--text);padding:7px 12px;font-size:14px;cursor:pointer}
+.controls select:focus{outline:1px solid var(--accent)}
+
+/* ── Quick Index ── */
+.quick-index{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center;
+  margin:18px 0 4px;padding:12px 14px;background:rgba(255,255,255,0.035);
+  border:1px solid var(--border);border-radius:12px}
+.quick-index .qi-label{font-size:12px;color:var(--accent);font-weight:600;margin-right:4px}
+.quick-index a{font-size:12.5px;color:var(--dim);text-decoration:none;padding:4px 11px;
+  border-radius:8px;border:1px solid var(--border);transition:all .2s}
+.quick-index a:hover{color:var(--text);border-color:rgba(255,255,255,0.25);background:rgba(255,255,255,0.06)}
+
+/* ── Section (犯太歲 / 飛星) ── */
+.section{margin:30px 0 6px;padding:20px 22px;background:var(--card);border:1px solid var(--border);border-radius:14px}
+.section-title{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;color:var(--accent);margin-bottom:8px}
+.section-title .zodiac-icon{width:38px;height:38px;border-radius:10px;background:rgba(230,160,74,0.13);border:1px solid rgba(230,160,74,0.35);display:flex;align-items:center;justify-content:center;font-size:19px}
+.section-intro{font-size:13px;color:var(--dim);line-height:1.8;margin-bottom:14px}
+
+/* ── 犯太歲 ── */
+.tai-summary{background:rgba(217,122,104,0.10);border:1px solid rgba(217,122,104,0.32);border-radius:10px;padding:12px 16px;font-size:13.5px;line-height:1.8;margin-bottom:14px;color:var(--text)}
+.tai-summary b{color:var(--red)}
+.tai-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin-bottom:14px}
+.tai-card{background:rgba(255,235,190,0.035);border:1px solid var(--border);border-radius:10px;padding:12px 13px}
+.tai-head{display:flex;align-items:center;gap:7px;margin-bottom:6px}
+.tai-icon{font-size:20px}
+.tai-z{font-size:17px;font-weight:700;color:var(--text)}
+.tai-type{font-size:11px;color:var(--red);background:rgba(217,122,104,0.14);border:1px solid rgba(217,122,104,0.3);border-radius:6px;padding:1px 8px;margin-left:auto;white-space:nowrap}
+.tai-desc{font-size:12.5px;color:var(--dim);line-height:1.7;margin-bottom:7px}
+.tai-remedy{font-size:12.5px;color:var(--gold);line-height:1.6}
+.tai-methods{background:rgba(255,235,190,0.03);border:1px dashed rgba(230,160,74,0.28);border-radius:10px;padding:12px 15px}
+.tai-methods-title{font-size:13.5px;font-weight:600;color:var(--accent);margin-bottom:7px}
+.tai-method{font-size:12.8px;color:var(--text);line-height:1.8}
+
+/* ── 九宮飛星 ── */
+.fly-year-label{font-size:13.5px;color:var(--teal);margin-bottom:10px;line-height:1.7}
+.fly-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.fly-cell{border-radius:10px;padding:11px 12px;border:1px solid var(--border);background:rgba(255,235,190,0.03)}
+.fly-cell.good{border-color:rgba(168,196,120,0.4);background:rgba(168,196,120,0.06)}
+.fly-cell.bad{border-color:rgba(217,122,104,0.42);background:rgba(217,122,104,0.07)}
+.fly-cell.mid{border-color:rgba(232,152,90,0.4);background:rgba(232,152,90,0.05)}
+.fly-dir{font-size:11.5px;color:var(--dim);margin-bottom:3px}
+.fly-star{font-size:26px;font-weight:800;line-height:1.1}
+.fly-cell.good .fly-star{color:var(--green)}
+.fly-cell.bad .fly-star{color:var(--red)}
+.fly-cell.mid .fly-star{color:var(--orange)}
+.fly-name{font-size:12px;color:var(--text);margin-top:2px;line-height:1.5}
+.fly-name small{color:var(--dim);font-size:11px}
+.fly-scope{font-size:11px;color:var(--dim);margin-top:3px;line-height:1.6}
+.fly-item{font-size:12px;color:var(--gold);margin-top:6px;line-height:1.6}
+.fly-note{font-size:11px;color:var(--dim);margin-top:5px;line-height:1.6}
+
+/* ── 十二生肖開運攻略 ── */
+.luck-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.luck-card{background:rgba(255,235,190,0.035);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.luck-head{display:flex;align-items:center;gap:8px;padding:12px 13px;cursor:pointer;user-select:none}
+.luck-head:hover{background:rgba(255,255,255,0.02)}
+.luck-icon{font-size:19px;flex-shrink:0}
+.luck-z{font-size:15px;font-weight:700;color:var(--text);flex-shrink:0}
+.luck-stars{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0;font-size:10.5px;line-height:1.4}
+.ls-good{color:var(--green)}
+.ls-bad{color:var(--red)}
+.luck-na{font-size:12px;color:var(--dim);flex:1}
+.luck-body{padding:0 13px 14px;border-top:1px solid var(--border)}
+.luck-overview{font-size:12.8px;color:var(--text);line-height:1.8;margin:10px 0 8px;background:rgba(255,235,190,0.04);border-radius:8px;padding:8px 11px}
+.luck-sec{margin:9px 0 0}
+.luck-sec-title{font-size:13px;font-weight:600;color:var(--gold);margin-bottom:4px}
+.luck-sec-text{font-size:12.5px;color:var(--text);line-height:1.8}
+.luck-card.collapsed .card-toggle{transform:rotate(-90deg)}
+.luck-card.collapsed .luck-body{display:none}
+
+/* ── Zodiac Grid ── */
+.zodiac-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin:24px 0}
+
+/* ── Zodiac Card ── */
+.zodiac-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .22s}
+.zodiac-card:hover{border-color:rgba(230,160,74,0.3)}
+.card-header{display:flex;align-items:center;gap:14px;padding:22px 22px 16px;border-bottom:1px solid var(--border);cursor:pointer;user-select:none}
+.card-header:hover{background:rgba(255,255,255,0.02)}
+.card-toggle{font-size:16px;color:var(--dim);transition:transform .25s;flex-shrink:0;width:22px;text-align:center}
+.zodiac-card.collapsed .card-toggle{transform:rotate(-90deg)}
+.zodiac-card.collapsed .card-body{display:none}
+.card-header .z-icon{width:50px;height:50px;border-radius:50%;
+  background:rgba(230,160,74,0.13);border:1px solid rgba(230,160,74,0.35);
+  display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.card-header .z-info{flex:1}
+.card-header .z-cn{font-size:18px;font-weight:700;color:var(--text)}
+.card-header .z-en{font-size:12.5px;color:var(--dim);margin-top:1px}
+.card-body{padding:0 22px 18px}
+
+/* ── Fortune Section ── */
+.fortune-sec{margin:14px 0 0}
+.fortune-sec:first-child{margin-top:16px}
+.fortune-sec .fs-label{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.fortune-sec .fs-label .fs-icon{width:28px;height:28px;border-radius:7px;
+  background:rgba(230,160,74,0.10);border:1px solid rgba(230,160,74,0.25);
+  display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.fortune-sec .fs-label .fs-title{font-size:14px;font-weight:600;color:var(--accent)}
+.fortune-sec .fs-text{font-size:13.8px;color:var(--text);line-height:1.8;margin-left:36px}
+
+/* ── Open luck highlight ── */
+.fortune-sec.open-luck .fs-label .fs-icon{background:rgba(217,122,104,0.15);border-color:rgba(217,122,104,0.35)}
+
+/* ── Footer ── */
+.footer{text-align:center;padding:32px 20px 48px;color:var(--dim);font-size:12.5px;border-top:1px solid var(--border);margin-top:28px}
+
+/* ── Back to Top ── */
+#toTop{position:fixed;right:22px;bottom:26px;width:46px;height:46px;border-radius:50%;
+  background:rgba(230,160,74,0.92);color:#fff;border:none;font-size:20px;cursor:pointer;
+  box-shadow:0 4px 14px rgba(0,0,0,0.35);opacity:0;visibility:hidden;transform:translateY(10px);transition:all .25s;z-index:99}
+#toTop.show{opacity:1;visibility:visible;transform:translateY(0)}
+#toTop:hover{background:var(--accent);transform:translateY(-2px)}
+
+/* ── Responsive ── */
+@media(max-width:640px){
+  .zodiac-grid{grid-template-columns:1fr;gap:14px}
+  .luck-grid{grid-template-columns:1fr;gap:10px}
+  h1{font-size:26px}
+  .hero{padding:38px 0 20px}
+  .card-header{padding:18px 18px 13px}
+  .card-body{padding:0 18px 16px}
+  .year-bar{gap:8px}
+  .year-card{min-width:100px;padding:11px 16px}
+  .year-card .y{font-size:22px}
+}
+
+/* ── 推演提示（2027-2030 非原著年份） ── */
+.derived-notice{display:flex;gap:9px;align-items:flex-start;margin:14px 0 0;
+  background:rgba(230,160,74,.09);border:1px solid rgba(230,160,74,.35);
+  border-left:3px solid #e6a04a;border-radius:10px;padding:11px 13px}
+.derived-notice .dn-icon{font-size:14px;flex-shrink:0;line-height:1.55}
+.derived-notice .dn-text{font-size:12.5px;line-height:1.65;color:var(--text)}
+.derived-notice .dn-text b{color:#e6a04a}
+.derived-notice[hidden]{display:none}
+
+/* ── 推演標籤（2027-2030 按麥氏規則推演，原著未出版） ── */
+.derived-tag{font-size:10px;font-weight:700;letter-spacing:.5px;color:#e6a04a;
+  background:rgba(230,160,74,.12);border:1px solid rgba(230,160,74,.35);
+  border-radius:999px;padding:2px 8px;flex-shrink:0;white-space:nowrap}
